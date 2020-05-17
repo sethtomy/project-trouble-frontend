@@ -3,6 +3,10 @@ import axios from 'axios'
 
 import trouble from '../res/trouble.jpg';
 
+const REACT_APP_LOGIC_HOST = process.env.REACT_APP_LOGIC_HOST;
+const REACT_APP_LOGIC_PORT = process.env.REACT_APP_LOGIC_PORT;
+const PREDICTION_URL = `http://${REACT_APP_LOGIC_HOST}:${REACT_APP_LOGIC_PORT}/predict`
+
 class Upload extends Component {
     constructor(props) {
         super(props);
@@ -40,7 +44,8 @@ class Upload extends Component {
                 'content-type': 'multipart/form-data',
             }
         }
-        axios.post('http://192.168.50.117:5000/predict', formData, config)
+        console.log(`Sending request to ${PREDICTION_URL}`);
+        axios.post(PREDICTION_URL, formData, config)
             .then(res => {
                 console.log('Success fetching classification.')
                 console.log(res.data)
@@ -78,7 +83,9 @@ class Upload extends Component {
             classesDisplay = <div>Loading...</div>;
         } else {
             classesDisplay = 
-                items.map(item => (<li key={Object.keys(item)[0]}>
+                items.map(item => (
+                    
+                    <li key={Object.keys(item)[0]}>
                     {Object.keys(item)[0]} {Object.values(item)[0]}
                 </li>))
         }
