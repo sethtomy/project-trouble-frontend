@@ -7,5 +7,5 @@ Webapp for Project Trouble, an app that allows you to take a picture of your dog
 To run locally:
 
 ```js
-npm run
+npm run start
 ```
